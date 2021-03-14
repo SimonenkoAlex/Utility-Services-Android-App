@@ -9,10 +9,12 @@
     <string name="input_firstname">Введите Имя</string>
     <string name="input_phone">Введите номер телефона</string>
     <string name="input_patronymic">Введите Отчество</string>
+    <string name="input_passport">Введите номер паспорта</string>
     <string name="welcome_text">Добро пожаловать</string>
     <string name="last_name">Фамилия :</string>
     <string name="first_name">Имя :</string>
     <string name="phone">Телефон :</string>
-    <string name="email">Email :</string>
+    <string name="passport">Номер паспорта :</string>
+    <string name="patronymic">Отчество :</string>
     <string name="action_exit">Выход</string>
 </resources>

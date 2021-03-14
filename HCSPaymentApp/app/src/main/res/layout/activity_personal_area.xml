@@ -94,6 +94,27 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/patronymic"
+                    android:textColor="@color/colorHeadline"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/patronymicText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,12 +139,12 @@
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"
+                    android:text="@string/passport"
                     android:textColor="@color/colorHeadline"
                     android:textSize="22sp" />
 
                 <TextView
-                    android:id="@+id/emailText"
+                    android:id="@+id/passportText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"

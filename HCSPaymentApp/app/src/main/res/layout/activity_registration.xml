@@ -76,6 +76,18 @@
             android:textSize="20sp"/>
 
         <EditText
+            android:id="@+id/textPassport"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/input_passport"
+            android:shadowColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            android:textSize="20sp"/>
+
+        <EditText
             android:id="@+id/loginText"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
