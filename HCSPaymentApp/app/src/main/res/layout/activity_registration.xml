@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivity" >
+    tools:context=".RegistrationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -27,38 +27,79 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+        <EditText
+            android:id="@+id/textLastname"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/housing_logo" />
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/input_lastname"
+            android:shadowColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/textFirstname"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/input_firstname"
+            android:shadowColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/textPatronymic"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/input_patronymic"
+            android:shadowColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/textPhone"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/input_phone"
+            android:shadowColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/loginText"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/input_login"
             android:inputType="textPersonName"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/passText"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/input_password"
             android:inputType="textPassword"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -67,20 +108,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:background="@drawable/style_button_iniciar"
-            android:text="@string/button_login"
+            android:text="@string/button_registration"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/registrationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/text_link_registration"
-            android:textColor="#A81FBF"
-            android:textSize="20sp" />
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

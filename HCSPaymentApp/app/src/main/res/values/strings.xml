@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">HCSPaymentApp</string>
     <string name="button_login">Вход</string>
-    <string name="input_login">Введите имя пользователя</string>
+    <string name="button_registration">Регистрация</string>
+    <string name="text_link_registration">Зарегистрироваться</string>
+    <string name="input_login">Введите Email</string>
     <string name="input_password">Введите пароль</string>
+    <string name="input_lastname">Введите Фамилию</string>
+    <string name="input_firstname">Введите Имя</string>
+    <string name="input_phone">Введите номер телефона</string>
+    <string name="input_patronymic">Введите Отчество</string>
     <string name="welcome_text">Добро пожаловать</string>
     <string name="last_name">Фамилия :</string>
     <string name="first_name">Имя :</string>
     <string name="phone">Телефон :</string>
     <string name="email">Email :</string>
+    <string name="action_exit">Выход</string>
 </resources>
