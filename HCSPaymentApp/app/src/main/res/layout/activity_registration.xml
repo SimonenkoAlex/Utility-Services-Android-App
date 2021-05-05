@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".RegistrationActivity">
+    android:background="@color/colorBackground"
+    tools:context=".RegistrationActivity" >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -23,98 +24,101 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/textLastname"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
+            android:inputType="text"
             android:hint="@string/input_lastname"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/textFirstname"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
+            android:inputType="text"
             android:hint="@string/input_firstname"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/textPatronymic"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
+            android:inputType="text"
             android:hint="@string/input_patronymic"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/textPhone"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
             android:hint="@string/input_phone"
+            android:inputType="phone"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/textPassport"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
             android:hint="@string/input_passport"
+            android:inputType="number"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/loginText"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
             android:hint="@string/input_login"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/passText"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:ems="10"
             android:hint="@string/input_password"
             android:inputType="textPassword"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegistration"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

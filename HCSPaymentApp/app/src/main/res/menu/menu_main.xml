@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PersonalAreaActivity">
     <item
+        android:id="@+id/action_reminder"
+        android:orderInCategory="100"
+        android:title="@string/action_reminder" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_exit" >
-    </item>
+        android:title="@string/action_exit" />
 </menu>

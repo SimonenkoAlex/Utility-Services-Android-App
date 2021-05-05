@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "374131189339",
+    "project_id": "hcspaymentapp",
+    "storage_bucket": "hcspaymentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374131189339:android:bfd07f85221e9c25f1017e",
+        "android_client_info": {
+          "package_name": "com.example.hcspaymentapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374131189339-q4pjqotrrq9915gelpj2dsucjkihrmov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hcspaymentapp",
+            "certificate_hash": "94a70f433637137bc28a93f463c655164efb1a32"
+          }
+        },
+        {
+          "client_id": "374131189339-bcocmau4ak0lu08ubp7ohgv1vnutlot5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHn_zWuu6ZGkkXImHrhjN_xb61ETRWC40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374131189339-bcocmau4ak0lu08ubp7ohgv1vnutlot5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

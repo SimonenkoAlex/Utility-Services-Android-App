@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/colorSecondaryBtnA"
+    android:color="@color/colorOptionalBtnA"
     tools:targetApi="lollipop">
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorSecondaryBtnB"></solid>
+            <solid android:color="@color/colorOptionalBtnB"></solid>
             <corners android:radius="50dp"></corners>
             <padding android:top="10dp" android:bottom="10dp" android:left="10dp" android:right="10dp"></padding>
         </shape>

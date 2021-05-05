@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorBackground"
     tools:context=".PersonalAreaActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -36,6 +36,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/suez_one"
             android:gravity="center"
             android:text="@string/welcome_text"
             android:textColor="@color/colorHeadline"

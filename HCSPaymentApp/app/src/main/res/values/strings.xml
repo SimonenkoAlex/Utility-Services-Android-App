@@ -7,6 +7,10 @@
     <string name="input_password">Введите пароль</string>
     <string name="input_lastname">Введите Фамилию</string>
     <string name="input_firstname">Введите Имя</string>
+    <string name="input_reminder_name">Введите название Напоминания</string>
+    <string name="input_reminder_text">Введите текст Напоминания</string>
+    <string name="input_time">Время</string>
+    <string name="input_date">Дата</string>
     <string name="input_phone">Введите номер телефона</string>
     <string name="input_patronymic">Введите Отчество</string>
     <string name="input_passport">Введите номер паспорта</string>
@@ -17,4 +21,5 @@
     <string name="passport">Номер паспорта :</string>
     <string name="patronymic">Отчество :</string>
     <string name="action_exit">Выход</string>
+    <string name="action_reminder">Напоминания</string>
 </resources>

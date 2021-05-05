@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorBackground"
+    android:id="@+id/activity_element"
     tools:context=".MainActivity" >
 
     <com.google.android.material.appbar.AppBarLayout
@@ -67,19 +68,21 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:background="@drawable/style_button_iniciar"
+            android:fontFamily="@font/montserrat_subrayada"
             android:text="@string/button_login"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/registrationText"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnRegistration"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:gravity="center"
+            android:fontFamily="@font/montserrat_subrayada"
             android:text="@string/text_link_registration"
-            android:textColor="#A81FBF"
+            android:background="@drawable/style_button_optional"
+            android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
 

@@ -1,10 +1,15 @@
 package com.example.hcspaymentapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
@@ -20,12 +33,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ConnectionDatabase connect = new ConnectionDatabase();
-    GlobalVariables gv = GlobalVariables.getInstance();
     // объявляем переменные
     final int MENU_QUIT_ID = 1;
-    Button btnLogin;
+    Button btnLogin, btnRegistration;
     EditText loginText, passText;
-    TextView registrationText;
+    CoordinatorLayout root;
+    FirebaseAuth auth;
+    FirebaseDatabase db;
+    DatabaseReference users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +51,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // присваеваем значение id каждого элемента интерфейса переменным
         btnLogin = (Button) findViewById(R.id.btnLogin);
         loginText = (EditText) findViewById(R.id.loginText);
-        registrationText = (TextView) findViewById(R.id.registrationText);
+        btnRegistration = (Button) findViewById(R.id.btnRegistration);
         passText = (EditText) findViewById(R.id.passText);
 
+        root = findViewById(R.id.activity_element);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        users = db.getReference("Users");
+
         btnLogin.setOnClickListener(this);
-        registrationText.setOnClickListener(this);
+        btnRegistration.setOnClickListener(this);
     }
 
     @Override
@@ -54,67 +74,91 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "Не удалось подключиться к серверу PostgreSQL", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.registrationText:
-                startActivity(new Intent(this, RegistrationActivity.class));
+            case R.id.btnRegistration:
+                showRegistrationWindow();
                 break;
         }
     }
 
+    private void showRegistrationWindow() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Регистрация");
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View activity_registration = inflater.inflate(R.layout.activity_registration, null);
+        dialog.setView(activity_registration);
+
+        final MaterialEditText lastname = activity_registration.findViewById(R.id.textLastname);
+        final MaterialEditText firstname = activity_registration.findViewById(R.id.textFirstname);
+        final MaterialEditText patronymic = activity_registration.findViewById(R.id.textPatronymic);
+        final MaterialEditText phone = activity_registration.findViewById(R.id.textPhone);
+        final MaterialEditText email = activity_registration.findViewById(R.id.loginText);
+        final MaterialEditText password = activity_registration.findViewById(R.id.passText);
+
+        dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialog.setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                if (TextUtils.isEmpty(email.getText().toString())) {
+                    Snackbar.make(root, "Введите свой email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(lastname.getText().toString())) {
+                    Snackbar.make(root, "Введите свою фамилию", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(firstname.getText().toString())) {
+                    Snackbar.make(root, "Введите своё имя", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(patronymic.getText().toString())) {
+                    Snackbar.make(root, "Введите своё отчество", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(phone.getText().toString())) {
+                    Snackbar.make(root, "Введите свой номер телефона", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.getText().toString().length() < 5) {
+                    Snackbar.make(root, "Введите пароль, который больше 5 символов", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                GlobalVariables user = new GlobalVariables();
+                                user.setEmail(email.getText().toString());
+                                user.setLast_name(lastname.getText().toString());
+                                user.setFirst_name(firstname.getText().toString());
+                                user.setPatronymic(patronymic.getText().toString());
+                                user.setPhone(phone.getText().toString());
+                                user.setPassword(password.getText().toString());
+
+                                users.child(user.getEmail()).setValue(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Snackbar.make(root, "Регтстрация прошла УСПЕШНО", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+            }
+        });
+        dialog.show();
+    }
+
     // создание функции для авторизации на PostgreSQL
     public void authorization(String login, String password){
-        try {
-            String storeProcedureCall = "SELECT * FROM to_login_android('" + login + "','" + password + "')";
-            Statement stmt = connect.getDBConnection().createStatement();
-            /*
-            CallableStatement stmt = connect.connectPostgreSQL().prepareCall(storeProcedureCall);
-            // первые два параметра являются входными
-            stmt.setString(1, login);
-            stmt.setString(2, password);
-            // последние 6 выходных данных показывают какого типа параметры
-            stmt.registerOutParameter(3, Types.INTEGER);
-            stmt.registerOutParameter(4, Types.VARCHAR);
-            stmt.registerOutParameter(5, Types.VARCHAR);
-            stmt.registerOutParameter(6, Types.VARCHAR);
-            stmt.registerOutParameter(7, Types.VARCHAR);
-            stmt.registerOutParameter(8, Types.VARCHAR);
 
-            stmt.executeUpdate();
-            */
-            ResultSet rs = stmt.executeQuery(storeProcedureCall);
-            ResultSetMetaData md = rs.getMetaData();
-            int _code = 0; String _last_name = null, _first_name = null, _patronymic = null;
-            String _phone = null, _report = null, _passport = null;
-            while(rs.next()) {
-                ArrayList<Object> mass = new ArrayList();
-                for(int i = 1; i <= md.getColumnCount(); i++) {
-                    mass.add(rs.getObject(i));
-                }
-                mass.toArray();
-                // объявляем переменные, получаемые от функции в PostgreSQL
-                _code = Integer.valueOf(mass.get(1).toString());
-                _last_name = mass.get(2).toString();
-                _first_name = mass.get(3).toString();
-                _patronymic = mass.get(4).toString();
-                _passport = mass.get(5).toString();
-                _phone = mass.get(6).toString();
-                _report = mass.get(7).toString();
-            }
-            // условие проверки правильности введения имени пользователя и пароля
-            if(_report.equals("OK")){
-                gv.set_code_user_login(_code);
-                gv.set_last_name(_last_name);
-                gv.set_first_name(_first_name);
-                gv.set_phone(_phone);
-                gv.set_patronymic(_patronymic);
-                gv.set_passport(_passport);
-                Intent personalArea = new Intent(this, PersonalAreaActivity.class);
-                startActivity(personalArea);
-            } else {
-                Toast.makeText(getApplicationContext(), _report.toString(), Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception error) {
-            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     // создание меню
@@ -135,3 +179,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 }
+    // Постоянный адрес текущей цветовой схемы:
+    // https://colorscheme.ru/#1g422makQw0w0

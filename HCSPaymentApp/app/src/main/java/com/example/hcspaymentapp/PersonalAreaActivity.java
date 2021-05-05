@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class PersonalAreaActivity extends AppCompatActivity {
-    GlobalVariables gv = GlobalVariables.getInstance();
+    //GlobalVariables gv = GlobalVariables.getInstance();
     // объявляем переменные
     TextView lastnameText, firstnameText, patronymicText, phoneText, passportText;
 
@@ -23,7 +23,7 @@ public class PersonalAreaActivity extends AppCompatActivity {
         patronymicText = findViewById(R.id.patronymicText);
         phoneText = findViewById(R.id.phoneText);
         passportText = findViewById(R.id.passportText);
-
+        /*
         if(gv.get_code_user_login() != 0) {
             lastnameText.setText(gv.get_last_name().toString());
             firstnameText.setText(gv.get_first_name().toString());
@@ -31,5 +31,6 @@ public class PersonalAreaActivity extends AppCompatActivity {
             phoneText.setText(gv.get_phone().toString());
             passportText.setText(gv.get_passport().toString());
         }
+         */
     }
 }

@@ -1,66 +1,80 @@
 package com.example.hcspaymentapp;
 
 public class GlobalVariables {
-    private static GlobalVariables instance;
-    private static int _code_user_login = 0;
-    private static String _last_name;
-    private static String _first_name;
-    private static String _phone;
-    private static String _passport;
-    private static String _patronymic;
+    private static String last_name;
+    private static String first_name;
+    private static String phone;
+    private static String passport;
+    private static String patronymic;
+    private static String password;
+    private static String email;
 
-    public int get_code_user_login() {
-        return _code_user_login;
+    public GlobalVariables() {}
+
+    public GlobalVariables(String last_name, String first_name, String patronymic,
+                           String phone, String passport, String password, String email) {
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.patronymic = patronymic;
+        this.phone = phone;
+        this.passport = passport;
+        this.password = password;
+        this.email = email;
     }
 
-    public void set_code_user_login(int _code_user_login) {
-        GlobalVariables._code_user_login = _code_user_login;
+    public static String getLast_name() {
+        return last_name;
     }
 
-    public String get_last_name() {
-        return _last_name;
+    public static void setLast_name(String last_name) {
+        GlobalVariables.last_name = last_name;
     }
 
-    public void set_last_name(String _last_name) {
-        GlobalVariables._last_name = _last_name;
+    public static String getFirst_name() {
+        return first_name;
     }
 
-    public String get_first_name() {
-        return _first_name;
+    public static void setFirst_name(String first_name) {
+        GlobalVariables.first_name = first_name;
     }
 
-    public void set_first_name(String _first_name) {
-        GlobalVariables._first_name = _first_name;
+    public static String getPhone() {
+        return phone;
     }
 
-    public String get_phone() {
-        return _phone;
+    public static void setPhone(String phone) {
+        GlobalVariables.phone = phone;
     }
 
-    public void set_phone(String _phone) {
-        GlobalVariables._phone = _phone;
+    public static String getPassport() {
+        return passport;
     }
 
-    public static String get_passport() {
-        return _passport;
+    public static void setPassport(String passport) {
+        GlobalVariables.passport = passport;
     }
 
-    public static void set_passport(String _passport) {
-        GlobalVariables._passport = _passport;
+    public static String getPatronymic() {
+        return patronymic;
     }
 
-    public String get_patronymic() {
-        return _patronymic;
+    public static void setPatronymic(String patronymic) {
+        GlobalVariables.patronymic = patronymic;
     }
 
-    public void set_patronymic(String _patronymic) {
-        GlobalVariables._patronymic = _patronymic;
+    public static String getPassword() {
+        return password;
     }
 
-    public static synchronized GlobalVariables getInstance() {
-        if (instance == null) {
-            instance = new GlobalVariables();
-        }
-        return instance;
+    public static void setPassword(String password) {
+        GlobalVariables.password = password;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        GlobalVariables.email = email;
     }
 }
