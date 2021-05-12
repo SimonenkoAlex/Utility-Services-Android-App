@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">HCSPaymentApp</string>
+    <string name="app_name">Оплата ЖКХ</string>
     <string name="button_login">Вход</string>
     <string name="button_registration">Регистрация</string>
-    <string name="text_link_registration">Зарегистрироваться</string>
+    <string name="button_start">Проодолжить</string>
     <string name="input_login">Введите Email</string>
     <string name="input_password">Введите пароль</string>
     <string name="input_lastname">Введите Фамилию</string>

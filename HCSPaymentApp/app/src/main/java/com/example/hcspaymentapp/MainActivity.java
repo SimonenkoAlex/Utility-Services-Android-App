@@ -1,5 +1,6 @@
 package com.example.hcspaymentapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,10 +19,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -35,12 +38,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ConnectionDatabase connect = new ConnectionDatabase();
     // объявляем переменные
     final int MENU_QUIT_ID = 1;
-    Button btnLogin, btnRegistration;
+    Button btnLogin, btnRegistration, btnStart;
     EditText loginText, passText;
-    CoordinatorLayout root;
+    TextView textUserEmail;
+
     FirebaseAuth auth;
     FirebaseDatabase db;
     DatabaseReference users;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser curUser = auth.getCurrentUser();
+        if (curUser != null) {
+            btnStart.setVisibility(View.VISIBLE);
+            textUserEmail.setVisibility(View.VISIBLE);
+            btnLogin.setVisibility(View.GONE);
+            btnRegistration.setVisibility(View.GONE);
+            loginText.setVisibility(View.GONE);
+            passText.setVisibility(View.GONE);
+            String userName = "Вы вошли как : " + curUser.getEmail();
+            textUserEmail.setText(userName);
+        } else {
+            btnStart.setVisibility(View.GONE);
+            textUserEmail.setVisibility(View.GONE);
+            btnLogin.setVisibility(View.VISIBLE);
+            btnRegistration.setVisibility(View.VISIBLE);
+            loginText.setVisibility(View.VISIBLE);
+            passText.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,113 +79,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogin = (Button) findViewById(R.id.btnLogin);
         loginText = (EditText) findViewById(R.id.loginText);
         btnRegistration = (Button) findViewById(R.id.btnRegistration);
+        btnStart = (Button) findViewById(R.id.btnStart);
         passText = (EditText) findViewById(R.id.passText);
+        textUserEmail = (TextView) findViewById(R.id.textUserEmail);
 
-        root = findViewById(R.id.activity_element);
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
+        users = db.getReference("users");
 
         btnLogin.setOnClickListener(this);
         btnRegistration.setOnClickListener(this);
+        btnStart.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnLogin:
-                if(connect.connectPostgreSQL()) {
-                    Toast.makeText(getApplicationContext(), "Подключение прошло успешно", Toast.LENGTH_SHORT).show();
-                    //authorization(loginText.getText().toString(), passText.getText().toString());
-                } else {
-                    Toast.makeText(getApplicationContext(), "Не удалось подключиться к серверу PostgreSQL", Toast.LENGTH_SHORT).show();
-                }
+            case R.id.btnLogin: {
+                authorization(loginText.getText().toString(), passText.getText().toString());
                 break;
-            case R.id.btnRegistration:
-                showRegistrationWindow();
+            }
+            case R.id.btnRegistration: {
+                startActivity(new Intent(this, RegistrationActivity.class));
                 break;
+            }
+            case R.id.btnStart: {
+                startActivity(new Intent(this, PersonalAreaActivity.class));
+                finish();
+                break;
+            }
         }
-    }
-
-    private void showRegistrationWindow() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Регистрация");
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View activity_registration = inflater.inflate(R.layout.activity_registration, null);
-        dialog.setView(activity_registration);
-
-        final MaterialEditText lastname = activity_registration.findViewById(R.id.textLastname);
-        final MaterialEditText firstname = activity_registration.findViewById(R.id.textFirstname);
-        final MaterialEditText patronymic = activity_registration.findViewById(R.id.textPatronymic);
-        final MaterialEditText phone = activity_registration.findViewById(R.id.textPhone);
-        final MaterialEditText email = activity_registration.findViewById(R.id.loginText);
-        final MaterialEditText password = activity_registration.findViewById(R.id.passText);
-
-        dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
-            }
-        });
-
-        dialog.setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                if (TextUtils.isEmpty(email.getText().toString())) {
-                    Snackbar.make(root, "Введите свой email", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(lastname.getText().toString())) {
-                    Snackbar.make(root, "Введите свою фамилию", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(firstname.getText().toString())) {
-                    Snackbar.make(root, "Введите своё имя", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(patronymic.getText().toString())) {
-                    Snackbar.make(root, "Введите своё отчество", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(phone.getText().toString())) {
-                    Snackbar.make(root, "Введите свой номер телефона", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (password.getText().toString().length() < 5) {
-                    Snackbar.make(root, "Введите пароль, который больше 5 символов", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                GlobalVariables user = new GlobalVariables();
-                                user.setEmail(email.getText().toString());
-                                user.setLast_name(lastname.getText().toString());
-                                user.setFirst_name(firstname.getText().toString());
-                                user.setPatronymic(patronymic.getText().toString());
-                                user.setPhone(phone.getText().toString());
-                                user.setPassword(password.getText().toString());
-
-                                users.child(user.getEmail()).setValue(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Snackbar.make(root, "Регтстрация прошла УСПЕШНО", Snackbar.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        });
-            }
-        });
-        dialog.show();
     }
 
     // создание функции для авторизации на PostgreSQL
     public void authorization(String login, String password){
+        if (TextUtils.isEmpty(login)) {
+            Toast.makeText(getApplicationContext(), "Введите свой email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (password.length() < 5) {
+            Toast.makeText(getApplicationContext(), "Введите пароль, который больше 5 символов", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        auth.signInWithEmailAndPassword(login, password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        GlobalVariables user = new GlobalVariables();
+                        Intent i = new Intent(MainActivity.this, PersonalAreaActivity.class);
+                        i.putExtra("user_last_name", user.getLast_name());
+                        i.putExtra("user_first_name", user.getFirst_name());
+                        i.putExtra("user_patronymic", user.getPatronymic());
+                        i.putExtra("user_phone", user.getPhone());
+                        i.putExtra("user_passport", user.getPassport());
+                        i.putExtra("user_email", user.getEmail());
+                        i.putExtra("user_password", user.getPassword());
+                        startActivity(i);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Ошибка авторизации. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // создание меню
@@ -171,12 +156,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // обработка нажатий на пункты меню
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        FirebaseUser curUser = auth.getCurrentUser();
         switch (item.getItemId()) {
-            case MENU_QUIT_ID: // выход из приложения
-                finish();
+            case MENU_QUIT_ID: { // выход из приложения
+                if (curUser != null) {
+                    FirebaseAuth.getInstance().signOut();
+                    btnStart.setVisibility(View.GONE);
+                    textUserEmail.setVisibility(View.GONE);
+                    btnLogin.setVisibility(View.VISIBLE);
+                    btnRegistration.setVisibility(View.VISIBLE);
+                    loginText.setVisibility(View.VISIBLE);
+                    passText.setVisibility(View.VISIBLE);
+                } else {
+                    finish();
+                }
                 break;
+            }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendEmailVerification() {
+
     }
 }
     // Постоянный адрес текущей цветовой схемы:

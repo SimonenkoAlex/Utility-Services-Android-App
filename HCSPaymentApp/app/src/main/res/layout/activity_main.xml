@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,6 +34,7 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
+            android:visibility="visible"
             app:srcCompat="@drawable/housing_logo" />
 
         <EditText
@@ -46,7 +48,8 @@
             android:inputType="textPersonName"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/passText"
@@ -59,7 +62,8 @@
             android:inputType="textPassword"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -71,7 +75,8 @@
             android:fontFamily="@font/montserrat_subrayada"
             android:text="@string/button_login"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btnRegistration"
@@ -79,11 +84,37 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_subrayada"
-            android:text="@string/text_link_registration"
             android:background="@drawable/style_button_optional"
+            android:fontFamily="@font/montserrat_subrayada"
+            android:text="@string/button_registration"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textUserEmail"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:textColor="@color/colorHeadline"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/style_button_iniciar"
+            android:fontFamily="@font/montserrat_subrayada"
+            android:text="@string/button_start"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,7 @@
 package com.example.hcspaymentapp;
 
 public class GlobalVariables {
+    private static String id_user;
     private static String last_name;
     private static String first_name;
     private static String phone;
@@ -12,7 +13,7 @@ public class GlobalVariables {
     public GlobalVariables() {}
 
     public GlobalVariables(String last_name, String first_name, String patronymic,
-                           String phone, String passport, String password, String email) {
+                           String phone, String passport, String email, String password) {
         this.last_name = last_name;
         this.first_name = first_name;
         this.patronymic = patronymic;
@@ -20,6 +21,14 @@ public class GlobalVariables {
         this.passport = passport;
         this.password = password;
         this.email = email;
+    }
+
+    public static String getId_user() {
+        return id_user;
+    }
+
+    public static void setId_user(String id_user) {
+        GlobalVariables.id_user = id_user;
     }
 
     public static String getLast_name() {
