@@ -78,6 +78,8 @@
             android:layout_marginTop="20dp"
             android:hint="@string/input_phone"
             android:inputType="phone"
+            android:lines="1"
+            android:maxLength="14"
             android:shadowColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
             android:textSize="20sp" />

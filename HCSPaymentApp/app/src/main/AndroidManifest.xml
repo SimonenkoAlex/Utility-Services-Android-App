@@ -14,10 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationActivity"
+        <activity
+            android:name=".WaterMeterActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".PersonalAreaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".RegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PersonalAreaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

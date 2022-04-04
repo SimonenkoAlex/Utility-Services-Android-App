@@ -4,11 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PersonalAreaActivity">
     <item
+        android:id="@+id/adding_readings"
+        android:orderInCategory="100"
+        android:title="@string/adding_readings" />
+    <item
         android:id="@+id/action_reminder"
         android:orderInCategory="100"
         android:title="@string/action_reminder" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
+        android:title="@string/action_settings" />
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:title="@string/action_help" />
+    <item
+        android:id="@+id/action_about_app"
+        android:orderInCategory="100"
+        android:title="@string/action_about_app" />
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
         android:title="@string/action_exit" />
+    <item
+        android:id="@+id/m_main_layout"
+        android:title="Layout"
+        android:icon="@drawable/ic_layout"
+        app:showAsAction="always" />
 </menu>

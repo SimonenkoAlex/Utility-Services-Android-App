@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".WaterMeterActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="?attr/colorPrimary">
+
+        <ImageView
+            android:id="@+id/a_counter_back"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:srcCompat="?homeAsUpIndicator"
+            android:padding="16dp"
+            app:tint="?android:colorForeground"
+            android:background="?selectableItemBackgroundBorderless" />
+
+        <ImageView
+            android:id="@+id/a_counter_del"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:srcCompat="@drawable/ic_delete"
+            android:padding="16dp"
+            app:tint="?android:colorForeground"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_gravity="end"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/a_counter_edit"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:srcCompat="@drawable/ic_edit"
+            android:padding="16dp"
+            app:tint="?android:colorForeground"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_gravity="end"
+            android:layout_marginRight="56dp"
+            android:layout_marginEnd="56dp"
+            tools:ignore="VectorDrawableCompat"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textLastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/previous_meter"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/i_counter_tint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/counter_item_bg"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/minus"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="−"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:background="?selectableItemBackgroundBorderless" />
+
+            <EditText
+                android:id="@+id/textPrevious"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:inputType="number"
+                android:textColor="@color/colorHint"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:background="?android:colorBackground"/>
+
+            <TextView
+                android:id="@+id/plus"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="+"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:background="?selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textPatronymic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/current_meter"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/i_counter_tint2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/counter_item_bg"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/minus2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="−"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:background="?selectableItemBackgroundBorderless" />
+
+            <EditText
+                android:id="@+id/textCurrent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:inputType="number"
+                android:textColor="@color/colorHint"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:background="?android:colorBackground"/>
+
+            <TextView
+                android:id="@+id/plus2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="+"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:background="?selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tariff"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textTariff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/result"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/style_button_iniciar"
+            android:text="@string/button_calculate"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/style_button_iniciar"
+            android:text="@string/button_add"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/style_button_optional"
+            android:text="@string/button_cancel"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

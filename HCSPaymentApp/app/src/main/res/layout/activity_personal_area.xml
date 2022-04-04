@@ -45,12 +45,12 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" >
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+                android:layout_height="match_parent" >
 
                 <TextView
                     android:id="@+id/textView2"
@@ -58,14 +58,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/last_name"
                     android:textColor="@color/colorHeadline"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/lastnameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TableRow
@@ -79,14 +79,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/first_name"
                     android:textColor="@color/colorHeadline"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/firstnameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TableRow
@@ -100,14 +100,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/patronymic"
                     android:textColor="@color/colorHeadline"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/patronymicText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TableRow
@@ -121,14 +121,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/phone"
                     android:textColor="@color/colorHeadline"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/phoneText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TableRow
@@ -142,17 +142,34 @@
                     android:layout_height="wrap_content"
                     android:text="@string/passport"
                     android:textColor="@color/colorHeadline"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/passportText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
         </TableLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/i_counter_tall" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/style_button_iniciar"
+            android:text="@string/button_add"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

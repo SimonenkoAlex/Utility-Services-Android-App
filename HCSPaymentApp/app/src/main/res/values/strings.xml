@@ -14,6 +14,8 @@
     <string name="input_phone">Введите номер телефона</string>
     <string name="input_patronymic">Введите Отчество</string>
     <string name="input_passport">Введите номер паспорта</string>
+    <string name="input_new_tariff">Введите новое значение тариффа :</string>
+    <string name="input_counter_color">Выбирите новый цвет счётчика :</string>
     <string name="welcome_text">Добро пожаловать</string>
     <string name="last_name">Фамилия :</string>
     <string name="first_name">Имя :</string>
@@ -21,5 +23,16 @@
     <string name="passport">Номер паспорта :</string>
     <string name="patronymic">Отчество :</string>
     <string name="action_exit">Выход</string>
+    <string name="action_about_app">О приложении</string>
+    <string name="action_help">Помощь</string>
     <string name="action_reminder">Напоминания</string>
+    <string name="adding_readings">Добавление показаний</string>
+    <string name="action_settings">Настройки</string>
+    <string name="previous_meter">Предыдущие показания счётчика :</string>
+    <string name="current_meter">Текущие показания счётчика :</string>
+    <string name="tariff">Тариф (руб.) :</string>
+    <string name="result">Итог (руб.) :</string>
+    <string name="button_calculate">Посчитать</string>
+    <string name="button_add">Добавить показания</string>
+    <string name="button_cancel">Отменить</string>
 </resources>

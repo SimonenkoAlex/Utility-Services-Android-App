@@ -1,8 +1,12 @@
 package com.example.hcspaymentapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +30,12 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class RegistrationActivity extends AppCompatActivity {
     // объявляем переменные
+    final String LOG_TAG = "myLogs";
     final int MENU_QUIT_ID = 1;
     Button btnRegistration;
-    EditText email, password, textPassport, textPhone,
+    EditText textEmail, textPass, textPassport, textPhone,
             textPatronymic, textFirstname, textLastname;
-    CoordinatorLayout root;
+    ConnectionDatabase database;
     FirebaseAuth auth;
     FirebaseDatabase db;
     DatabaseReference users;
@@ -47,9 +52,14 @@ public class RegistrationActivity extends AppCompatActivity {
         textPatronymic = (EditText) findViewById(R.id.textPatronymic);
         textPhone = (EditText) findViewById(R.id.textPhone);
         textPassport = (EditText) findViewById(R.id.textPassport);
-        email = (EditText) findViewById(R.id.loginText);
-        password = (EditText) findViewById(R.id.passText);
+        textEmail = (EditText) findViewById(R.id.loginText);
+        textPass = (EditText) findViewById(R.id.passText);
         btnRegistration = (Button) findViewById(R.id.btnRegistration);
+
+        textPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        // создаем объект для создания и управления версиями БД
+        database = new ConnectionDatabase(this);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -58,49 +68,73 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(email.getText().toString())) {
+                // создаем объект для данных
+                final ContentValues cv = new ContentValues();
+                // получаем данные из полей ввода
+                if (TextUtils.isEmpty(textEmail.getText().toString().toLowerCase())) {
                     Toast.makeText(getApplicationContext(), "Введите свой email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final String email = textEmail.getText().toString();
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(getApplicationContext(),"Пожалуйста введите корректный Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(textLastname.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Введите свою фамилию", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                final String lastname = textLastname.getText().toString();
                 if (TextUtils.isEmpty(textFirstname.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Введите своё имя", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                final String firstname = textFirstname.getText().toString();
                 if (TextUtils.isEmpty(textPatronymic.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Введите своё отчество", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                final String patronymic = textPatronymic.getText().toString();
                 if (TextUtils.isEmpty(textPhone.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Введите свой номер телефона", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                final String phone = textPhone.getText().toString();
                 if (TextUtils.isEmpty(textPassport.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Введите номер своего паспорта", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.getText().toString().length() < 5) {
-                    Toast.makeText(getApplicationContext(), "Введите пароль, который больше 5 символов", Toast.LENGTH_SHORT).show();
+                final String passport = textPassport.getText().toString();
+                if (textPass.getText().toString().length() < 6) {
+                    Toast.makeText(getApplicationContext(), "Введите пароль, который больше 6 символов", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // подключаемся к БД
+                final SQLiteDatabase sqldb = database.getWritableDatabase();
 
-                auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                auth.createUserWithEmailAndPassword(textEmail.getText().toString(), textPass.getText().toString())
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                // подготовим данные для вставки в виде пар: наименование столбца - значение
+                                cv.put("last_name", lastname);
+                                cv.put("first_name", firstname);
+                                cv.put("patronymic", patronymic);
+                                cv.put("phone", phone);
+                                cv.put("email", email);
+                                cv.put("passport", passport);
                                 GlobalVariables user = new GlobalVariables();
                                 user.setId_user(users.getKey());
-                                user.setEmail(email.getText().toString());
+                                user.setEmail(textEmail.getText().toString());
                                 user.setLast_name(textLastname.getText().toString());
                                 user.setFirst_name(textFirstname.getText().toString());
                                 user.setPatronymic(textPatronymic.getText().toString());
                                 user.setPhone(textPhone.getText().toString());
                                 user.setPhone(textPassport.getText().toString());
-                                user.setPassword(password.getText().toString());
-                                users.push().setValue(user);
+                                user.setPassword(textPass.getText().toString());
+                                // вставляем запись и получаем ее ID
+                                long rowID = sqldb.insert("renter", null, cv);
+                                Log.d(LOG_TAG, "row inserted, ID = " + rowID);
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {

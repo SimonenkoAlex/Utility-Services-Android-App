@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +36,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private ConnectionDatabase connect = new ConnectionDatabase();
     // объявляем переменные
     final int MENU_QUIT_ID = 1;
     Button btnLogin, btnRegistration, btnStart;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin: {
-                authorization(loginText.getText().toString(), passText.getText().toString());
+                authorization(loginText.getText().toString().toLowerCase(), passText.getText().toString());
                 break;
             }
             case R.id.btnRegistration: {
